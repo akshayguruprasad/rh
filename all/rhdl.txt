@@ -1,0 +1,2 @@
+ssh -i key akshay.g-capgemini.com@bastion.7914.example.opentlc.com
+r3dh4t1!

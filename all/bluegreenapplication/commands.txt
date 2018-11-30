@@ -1,0 +1,19 @@
+ 1052  oc new-project bluegreen
+ 1053  clear
+ 1054  oc status
+ 1055  oc new-app --name='blue' --labels=name="blue" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+ 1056  oc expose svc/blue --name=bluegreen
+ 1057  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1058  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1059  oc new-app --name='green' --labels=name=green php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cities
+ 1060  oc patch route/bluegreen -p '{"spec":{"to":{"name":"green"}}}'
+ 1061  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1062  oc set env dc/blue SELECTOR=pets
+ 1063  oc get all
+ 1064  oc get all
+ 1065  oc set route-backends bluegreen green=10 blue=20
+ 1066  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1067  oc set probe dc/green --readiness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1068  oc set probe dc/blue --readiness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1069  oc set probe dc/green --liveness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1070  oc set probe dc/blue --liveness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2

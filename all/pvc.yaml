@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: pvc001
+ annotations:
+   volume.beta.kubernetes.io/storage-class: fast
+spec:
+ accessModes:
+  - ReadWriteMany
+ resources:
+   requests:
+     storage: 100m

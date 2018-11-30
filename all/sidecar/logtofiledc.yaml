@@ -1,0 +1,107 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: '2018-11-28T18:55:07Z'
+  generation: 2
+  labels:
+    app: logtofile
+  name: logtofile
+  namespace: side-delete
+  resourceVersion: '463912'
+  selfLink: "/apis/apps.openshift.io/v1/namespaces/side-delete/deploymentconfigs/logtofile"
+  uid: 1f8da09e-f33f-11e8-b028-025673be3232
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: logtofile
+    deploymentconfig: logtofile
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: 
+      labels:
+        app: logtofile
+        deploymentconfig: logtofile
+    spec:
+      containers:
+      - args:
+        - "/bin/sh"
+        - "-c"
+        - tail -n+1 -f /tmp/datelog.txt && sleep 5
+        image: docker.io/busybox:latest
+        imagePullPolicy: Always
+        name: logging-sidecar
+        resources: {}
+        terminationMessagePath: "/dev/termination-log"
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: "/tmp"
+          name: tmp
+      - image: docker.io/wkulhanek/logtofile@sha256:7b28abe15eb652b705b942a692e81e1a4a7e121a5079c5a3623dc1b345868168
+        imagePullPolicy: Always
+        name: logtofile
+        resources: {}
+        terminationMessagePath: "/dev/termination-log"
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: "/tmp"
+          name: tmp
+      volumes:
+      - emptyDir: {}
+        name: tmp
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - logtofile
+      from:
+        kind: ImageStreamTag
+        name: logtofile:latest
+        namespace: side-delete
+      lastTriggeredImage: docker.io/wkulhanek/logtofile@sha256:7b28abe15eb652b705b942a692e81e1a4a7e121a5079c5a3623dc1b345868168
+    type: ImageChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: '2018-11-28T18:55:14Z'
+    lastUpdateTime: '2018-11-28T18:55:14Z'
+    message: Deployment config has minimum availability.
+    status: 'True'
+    type: Available
+  - lastTransitionTime: '2018-11-28T18:55:14Z'
+    lastUpdateTime: '2018-11-28T18:55:14Z'
+    message: replication controller "logtofile-1" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: 'True'
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1

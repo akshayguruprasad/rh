@@ -1,0 +1,1027 @@
+  229              }],
+  230              "restartPolicy": "Always",
+  231              "terminationGracePeriodSeconds": 30,
+  232              "dnsPolicy": "ClusterFirst",
+  233              "securityContext": {}
+  234            }
+  235          }
+  236        },
+  237        "status": {}
+  238      },
+  239      {
+  240        "kind": "Service",
+  241        "apiVersion": "v1",
+  242        "metadata": {
+  243          "name": "deployment-example",
+  244          "creationTimestamp": null,
+  245          "labels": {
+  246            "app": "deployment-example"
+  247          }
+  248        },
+  249        "spec": {
+  250          "ports": [{
+  251            "name": "8080-tcp",
+  252            "protocol": "TCP",
+  253            "port": 8080,
+  254            "targetPort": 8080
+  255          }],
+  256          "selector": {
+  257            "app": "deployment-example",
+  258            "deploymentconfig": "deployment-example"
+  259          },
+  260          "type": "ClusterIP",
+  261          "sessionAffinity": "None"
+  262        },
+  263        "status": {
+  264          "loadBalancer": {}
+  265        }
+  266      },
+  267      {
+  268        "kind": "Route",
+  269        "apiVersion": "v1",
+  270        "metadata": {
+  271          "name": "deployment-example"
+  272        },
+  273        "spec": {
+  274          "to": {
+  275            "kind": "Service",
+  276            "name": "deployment-example"
+  277          }
+  278        }
+  279      }
+  280    ]
+  281  }
+  282  EOF
+  283  pwd
+  284  ls
+  285  oc process $HOME/deployment-example.json > $HOME/processexample
+  286  oc process -f  $HOME/deployment-example.json > $HOME/processexample
+  287  cat \$HOME/processexample
+  288  ls $HOME
+  289  ls -l $HOME
+  290  oc process -f $HOME/deployment-example.json | oc create -f -
+  291  oc --help
+  292  oc new-project xyz-env
+  293  oc new-app https://github.com/wkulhanek/PrintEnv
+  294  oc expose svc printenv
+  295  oc new-project xyz-env
+  296  oc new-app https://github.com/wkulhanek/PrintEnv
+  297  oc get all
+  298  clear
+  299  oc new project manage
+  300  oc new-project manage
+  301  oc new-app https://github.com/wkulhanek/PrintEnv
+  302  oc get all
+  303  clear
+  304  oc get all
+  305  oc expose svc printenv
+  306  oc get all
+  307  oc get all
+  308  oc get all
+  309  oc get all
+  310  oc set env dc/printenv APP_VAR_1=Value1 APP_VAR_2=Value2
+  311  oc set env dc/printenv APP_VAR_2-
+  312  oc create configmap printenv-config     --from-literal=APP_VAR_3=Value3     --from-literal=APP_VAR_4=Value4
+  313  echo 'r3dh4t1!' > ./password.txt
+  314  echo 'admin' > ./user.txt
+  315  oc secret new printenv-secret app_user=user.txt app_password=password.txt
+  316  oc describe secrets printenv-secret
+  317  oc edit secrets printenv-secret
+  318  history
+  319  history | grep master
+  320  history | grep ssh
+  321  oc login -u user8 https://master.4df4.openshift.opentlc.com <https://master.4df4.openshift.opentlc.com>
+  322  oc login -u user8 https://master.4df4.openshift.opentlc.com <https://master.4df4.openshift.opentlc.com>
+  323  oc login -u user8 https://master.4df4.openshift.opentlc.com
+  324  clear
+  325  oc get status
+  326  oc  status
+  327  oc new-app --name='blue' --labels=name="blue" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  328  oc get all
+  329  oc new-app --name='blue' --labels=name="blue" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  330  oc new-project contoller-1
+  331  oc new-app --name='blue' --labels=name="blue" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  332  oc get all
+  333  oc get all
+  334  oc get all
+  335  oc get all
+  336  oc expose svc blue
+  337  oc get route
+  338  oc get route blue --template="{{ .spec.host}}"
+  339  while true; do curl -s $(oc get route blue --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+  340  clear
+  341  oc get route blue --template="{{ .spec.host}}"
+  342  oc get all
+  343  oc new-app --name='green' --labels=name="green" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cities
+  344  oc get all
+  345  oc patch
+  346  oc patch -h
+  347  oc get dc
+  348  oc get dc green
+  349  oc describe dc green
+  350  oc patch -h
+  351  oc describe route
+  352  nano green.json
+  353  oc describe route -o json
+  354  oc describe -o  route -o json
+  355  oc get route
+  356  oc edit route
+  357  OC_EDITOR="nano" oc edit route
+  358  oc get all
+  359  oc get route --template="{{ .spec.host }}"
+  360  oc get route --template="{{ .spec .host }}"
+  361  oc get route --template="{{ .specs .host }}"
+  362  oc get route blue --template="{{ .spec.host}}"
+  363  oc get svc
+  364  oc describe svc blue
+  365  oc describe svc green
+  366  oc describe route -o json
+  367  oc describe route  json
+  368  oc clear
+  369  clear
+  370  oc describe svc green+
+  371  oc describe svc green
+  372  oc oc route route
+  373  oc route route
+  374  oc edit route
+  375  oc set env --SELECTOR=cities
+  376  oc set env SELECTOR=cities
+  377  oc set env -h
+  378  oc set env --env=SELECTOR=cities
+  379  oc describe dc
+  380  oc get dc
+  381  oc set env dc/blue SELECTOR=pets
+  382  oc logs -f blue
+  383  oc get pods
+  384  oc get pods
+  385  oc get pods
+  386  oc logs -f blue-1-fg4qr
+  387  oc logs -f blue-2-fg4qr
+  388  oc get events
+  389  oc set env dc/blue SELECTOR=cities
+  390  oc get events
+  391  oc get -f events
+  392  oc get events
+  393  oc logs
+  394  clear
+  395  oc get dc blue
+  396  oc describe dc blue
+  397  clear
+  398  oc set route-backends bluegreen green=100 blue=0
+  399  oc set route-backends blue green=100 blue=0
+  400  oc describe dc blue
+  401  oc set env SELECTOR=pets
+  402  oc set env  dc green SELECTOR=pets
+  403  oc delete project --all
+  404  oc new-project pro-1
+  405  oc new-app --name='blue' --labels=name="blue" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  406  oc new-app --name='green' --labels=name="green" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cities
+  407  oc get all
+  408  oc edit -h
+  409  oc get all
+  410  oc expose svc green
+  411  oc get all
+  412  oc get all
+  413  oc get route
+  414  history
+  415  clear
+  416  clear
+  417  history
+  418  oc describe route
+  419  oc patch route green -p '{"spec":{"to":{"name":"blue"}}}'
+  420  oc describe route
+  421  history
+  422  oc set env dc/green SELECTOR=pets
+  423  oc set route-backends green blue=10 green 20
+  424  oc set route-backends green blue=10 green=20
+  425  oc describe route
+  426  oc get dc green
+  427  oc describe dc green
+  428  touch writelog.sh
+  429  nano writelog.sh
+  430  cd /tmp
+  431  ls
+  432  docker
+  433  clear
+  434  cd $HOME
+  435  pwd
+  436  oc set probe dc/green --readiness
+  437  oc describe dc green -o json
+  438  oc describe dc green
+  439  hsitory
+  440  clear
+  441  oc get routes
+  442  oc describe route
+  443  oc set env --list
+  444  oc set env dc --list
+  445  oc set env dc --list
+  446  oc new-project xyz-logging --display-name "XYZ Logging"
+  447  oc new-project xyz-logging --display-name "XYZ Logging-final"
+  448  oc new-project xyz-loggin-finalg --display-name "XYZ Logging"
+  449  echo "FROM docker.io/centos:7
+  450  COPY ./root /
+  451  ENTRYPOINT ["/usr/bin/writelog"]" >Dockerfile
+  452  ls
+  453  cat Dockerfile
+  454  while [ true ]; do   date >>/tmp/datelog.txt;   sleep 5; done
+  455  while [ true ]; do   date >>/tmp/datelog.txt;   sleep 5; done" >/usr/bin/writelog.sh
+  456  touch /usr/bin/writelog.sh
+  457  nano /usr/bin/writelog.sh
+  458  bash /usr/bin/write
+  459  bash /usr/bin/writelog.sh
+  460  date
+  461  bash /usr/bin/writelog
+  462  bash /usr/bin/writelog.sh
+  463  cd /tmp
+  464  ls
+  465  cat datelog.txt
+  466  cd $HOME
+  467  oc new-app --docker-image=docker.io/wkulhanek/logtofile:latest
+  468  oc new-app -h
+  469  clear
+  470  oc get all
+  471  oc logs -f logtofile-1-n5gl6
+  472  oc logs  logtofile-1-n5gl6
+  473  oc logs  logtofile-1-n5gl6
+  474  oc edit dc logtofile
+  475  OC_EDITOR="nano" oc edit dc logfile
+  476  OC_EDITOR="nano" oc edit dc logtofile
+  477  OC_EDITOR="nano" oc edit dc logtofile
+  478  OC_EDITOR="nano" oc edit dc logtofile
+  479  OC_EDITOR="nano" oc edit dc logtofile
+  480  clear
+  481  nano dc.yaml
+  482  oc get all
+  483  oc edit --help
+  484  oc get all
+  485  oc edit dc logtofile --filename=./dc.yaml
+  486  oc get all
+  487  sleep 5
+  488  sleep 5
+  489  tail
+  490  ocdescribe dc
+  491  oc describe dc
+  492  oc edit dc logtofile
+  493  oc edit dc logtofile
+  494  OC_EDITOR="nano" oc edit dc logtofile
+  495  OC_EDITOR="nano" oc edit dc logtofile
+  496  OC_EDITOR="nano" oc edit dc logtofile
+  497  OC_EDITOR="nano" oc edit dc logtofile
+  498  OC_EDITOR="nano" oc edit dc logtofile
+  499  clear
+  500  nano dc.yaml
+  501  clear
+  502  oc edit -h
+  503  oc edit logtofile --filename="./dc.yaml"
+  504  pwd
+  505  exit
+  506  cd /root
+  507  exit
+  508  exit
+  509  pwd
+  510  ls
+  511  ls
+  512  oc get dc
+  513  oc apply -h
+  514  pwd
+  515  cd $HOME
+  516  oc apply -f dc.yaml
+  517  oc apply logtofile ./dc.yaml
+  518  oc apply -h
+  519  oc apply --filename=.dc.yaml
+  520  oc apply --filename=./dc.yaml
+  521  clear
+  522  oc edit dc logtofile
+  523  oc describe dc
+  524  clear
+  525  oc edit dc logtofile
+  526  oc get apps
+  527  oc get app
+  528  oc get --all
+  529  clear
+  530  oc edit  logtofile
+  531  oc edit  dc logtofile
+  532  oc get projects
+  533  oc delete project xyz-loggin-finalg
+  534  oc new-project xyz-logging --display-name "XYZ Logging"
+  535  ls
+  536  oc new-app --docker-image=docker.io/wkulhanek/logtofile:latest
+  537  dockerimages
+  538  docker imagesw
+  539  docker images
+  540  docker docker.io/busybox -c /bin/sh "echo'hello'
+  541  ;
+  542  docker run docker.io/busybox -c /bin/sh "echo'hello'
+  543  ;
+  544  ;
+  545  docker run docker.io/busybox -c /bin/sh "echo'hello'"
+  546  docker run docker.io/busybox
+  547  docker logs 59788edf1f3e
+  548  docker ps
+  549  docker run -d docker.io/busybox
+  550  docker ps
+  551  docker ps -a
+  552  docker run -d docker.io/busybox /bin/sh
+  553  docker ps -a
+  554  docker ps
+  555  clear
+  556  oc get all
+  557  oc edit dc logtofile
+  558  oc edit dc logtofile
+  559  oc describe logtofile
+  560  oc describe dc logtofile
+  561  oc edit dc logtofile
+  562  oc get aall
+  563  oc get all
+  564  oc edit dc logtofile
+  565  OC_EDITOR="nano" oc edit dc logtofile
+  566  oc apply -f dc/logtofile --filename=./dc.yaml
+  567  oc apply -f dc logtofile --filename=./dc.yaml
+  568  oc apply -f dc --filename=./dc.yaml
+  569  oc apply -f  --filename=./dc.yaml
+  570  oc apply -f --filename=./dc.yaml
+  571  oc apply -f --filename="./dc.yaml"
+  572  oc apply -f "./dc.yaml"
+  573  oc get all
+  574  oc apply -f ./dc.yaml
+  575  oc apply -f dc.yaml
+  576  rename dc.yaml
+  577  rename dc.yaml logtofile
+  578  rename dc.yaml logtofile.yaml
+  579  cat dc.yaml >logtofile.yaml
+  580  oc apply -f logtofile.yaml
+  581  oc get projects
+  582  exit
+  583  exit
+  584  clear
+  585  oc new-project xyz-nexus
+  586  oc new-project xyz-nexus1
+  587  oc new-app sonarcube docker.io/sonatype/nexus3:latest
+  588  oc new-app sonarcube --docker-image=docker.io/sonatype/nexus3:latest
+  589  oc new-app sonarcube --docker-image=sonatype/nexus3:latest
+  590  oc new-app  sonatype/nexus3:latest
+  591  oc expose svc nexus3
+  592  oc rollout pause dc nexus3
+  593  oc get al
+  594  oc get all
+  595  clear
+  596  oc create -h
+  597  oc pvc -h
+  598  oc new
+  599  oc get dc -o json
+  600  oc patch dc -p
+  601  oc patch dc -p="{"spec":{"strategy":{"type":"Recreate"}}}"
+  602  oc get dc
+  603  oc patch dc nexus3 -p="{"spec":{"strategy":{"type":"Recreate"}}}"
+  604  clear
+  605  oc patch dc nexus3 -p="{"spec":{"strategy":{"type":"Recreate"}}}"
+  606  oc patch dc nexus3 -p='{"spec":{"strategy":{"type":"Recreate"}}}'
+  607  oc set resources -h
+  608  oc set resources --requests="cpu=100m,memory=256Mi" --limit="cpu=100m,memory=256Mi"
+  609  oc set resources dc nexus3 --requests="cpu=100m,memory=256Mi" --limit="cpu=100m,memory=256Mi"
+  610  clear
+  611  oc set resources dc nexus3 --requests="cpu=100m,memory=256Mi" --limit="cpu=100m,memory=256Mi"
+  612  oc set resources dc nexus3 --requests="cpu=100m,memory=256Mi" --limits="cpu=100m,memory=256Mi"
+  613  clear
+  614  nano pvctemplate.yaml
+  615  oc create -f pvctemplate.yaml
+  616  oc get all
+  617  oc get pvc
+  618  oc get pvc
+  619  oc get pvc
+  620  oc get pvc
+  621  clear
+  622  clear
+  623  oc get pvc
+  624  oc get pvc
+  625  oc pvc pvc001 stop
+  626  oc stop  pvc pvc001
+  627  oc delete pvc pvc001
+  628  echo "apiVersion: v1
+  629  kind: PersistentVolumeClaim
+  630  metadata:
+  631    name: nexus-pvc
+  632  spec:
+  633    accessModes:
+  634    - ReadWriteOnce
+  635    resources:
+  636      requests:
+  637        storage: 4Gi" | oc create -f -
+  638  oc set volume dc/nexus3 --add --overwrite --name=nexus3-volume-1 --mount-path=/nexus-data/ --type persistentVolumeClaim --claim-name=nexus-pvc
+  639  oc set probe dc/nexus3 --liveness --failure-threshold 3 --initial-delay-seconds 60 -- echo ok
+  640  oc get all
+  641  oc get routes
+  642  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  643  oc get dc
+  644  oc set probe dc nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  645  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  646  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  647  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=https://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  648  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  649  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  650  oc set probe -h
+  651  oc get all
+  652  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  653  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com
+  654  oc get dc nexus3 -o json
+  655  nslookup http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  656  oc set probe dc/nexus3 --readiness
+  657  oc set probe dc/nexus3 --liveness --failure-threshold 3 --initial-delay-seconds 60 -- echo ok
+  658  oc set probe dc/nexus3 --rediness --failure-threshold 3 --initial-delay-seconds 60
+  659  oc set probe dc/nexus3 --rediness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  660  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com/
+  661  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com:8080/
+  662  oc get routes
+  663  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com:8081/
+  664  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-xyz-nexus1.apps.4df4.openshift.opentlc.com:8081/
+  665  oc rollout resume dc nexus3
+  666  oc get all
+  667  oc get all
+  668  oc get all
+  669  curl -o setup_nexus3.sh -s https://raw.githubusercontent.com/redhat-gpte-devopsautomation/ocp_advanced_development_resources/master/nexus/setup_nexus3.sh
+  670  chmod +x setup_nexus3.sh
+  671  ./setup_nexus3.sh admin admin123 http://$(oc get
+  672  ;
+  673  chmod +x setup_nexus3.sh
+  674  ls
+  675  cat setup_nexus3.sh
+  676  clear
+  677  ./setup_nexus3.sh admin admin123 http://$(oc get route nexus3 --template='{{ .spec.host }}')
+  678  rm setup_nexus3.sh
+  679  ls
+  680  oc expose dc nexus3 --port=5000 --name=nexus-registry
+  681  oc create route edge nexus-registry --service=nexus-registry --port=5000
+  682  oc get routes -n xyz-nexus
+  683  oc get all
+  684  oc get routes -n nexus3
+  685  clear
+  686  oc status
+  687  oc get routes -n xyz-nexus1
+  688  oc annotate route nexus3 console.alpha.openshift.io/overview-app-route=true
+  689  oc annotate route nexus-registry console.alpha.openshift.io/overview-app-route=false
+  690  oc logs -f dc nexus3
+  691  oc logs -f nexus3
+  692  oc get all
+  693  oc logs -f nexus3-2-deploy
+  694  oc new-build  -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\n
+  695        USER root\nRUN yum -y install skopeo && yum clean all\n
+  696        USER 1001' --name=jenkins-agent-appdev -n xyz-jenkins
+  697  clear
+  698  oc new-build  -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\n
+  699        USER root\nRUN yum -y install skopeo && yum clean all\n
+  700        USER 1001' --name=jenkins-agent-appdev -n xyz-jenkins
+  701  oc new-build  -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\n
+  702        USER root\nRUN yum -y install skopeo && yum clean all\n
+  703        USER 1001' --name=jenkins-agent-appdev -n xyz-jenkins1
+  704  oc new-build -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\n
+  705        USER root\nRUN yum -y install skopeo && yum clean all\n
+  706        USER 1001' --name=jenkins-agent-appdev -n xyz-jenkins1
+  707  nano Dockerfile
+  708  oc new-build  --dockerfile=./Dockerfile
+  709  ?oc new-project xyz-jenkins --display-name "Shared Jenkins"
+  710  clear
+  711  ?oc new-project xyz-jenkins --display-name "Shared Jenkins"
+  712  oc status
+  713  exit
+  714  oc new-project xyz-jenkins --display-name="shared jenkins"
+  715  oc new-project xyz-jenkins1 --display-name="shared jenkins"
+  716  oc new-app jenkins-persistent --param ENABLE_OAUTH=true --param MEMORY_LIMIT=2Gi --param VOLUME_CAPACITY=4Gi --param DISABLE_ADMINISTRATIVE_MONITORS=true
+  717  oc new-app jenkins-persistent --param ENABLE_OAUTH=true --param MEMORY_LIMIT=2Gi --param VOLUME_CAPACITY=4Gi
+  718  oc status
+  719  clear
+  720  oc statusw
+  721  oc status
+  722  oc new-build -h
+  723  oc new-build --docker-file=./Dockerfile
+  724  clear
+  725  oc new-build --docker-file=./Dockerfile
+  726  oc new-build --docker-file=./Dockerfile  --name=jenkins-agent-appdev -n xyz-jenkins
+  727  clear
+  728  oc new-build --docker-file=./Dockerfile  --name=jenkins-agent-appdev -n xyz-jenkins1
+  729  oc new-build  --name=jenkins-agent-appdev -n xyz-jenkins1
+  730  oc new-build  -D ./Dockerfile --name=jenkins-agent-appdev -n xyz-jenkins1
+  731  cat Dockerfile
+  732  ls
+  733  nano DOck
+  734  nano Dockerfile
+  735  oc new-build  -D cat ./Dockerfile --name=jenkins-agent-appdev -n xyz-jenkins1
+  736  oc new-build  -D $(cat ./Dockerfile) --name=jenkins-agent-appdev -n xyz-jenkins1
+  737  cat Dockerfile |oc new-build --name=jenkins-agent-appdev -n xyz-jenkins1
+  738  export $Dock=cat Dockerfile
+  739  cat Dockerfile
+  740  cat Dockerfile |export $Doc
+  741  cat Dockerfile |oc new-build --name=jenkins-agent-appdev -n xyz-jenkins1
+  742  oc new-build  -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\n
+  743        USER root\nRUN yum -y install skopeo && yum clean all\n
+  744        USER 1001' --name=jenkins-agent-appdev -n xyz-jenkins1
+  745  oc get is
+  746  oc new-project xyz-logging --display-name "XYZ Logging"
+  747  oc get projects
+  748  clear
+  749  oc project xyz-logging
+  750  oc status
+  751  oc status -v
+  752  oc get all
+  753  oc delete -h
+  754  oc delete --selector=
+  755  oc get all
+  756  oc get  dc logtofile -o json
+  757  oc delete --selector=logtofile
+  758  oc delete xyz-logging
+  759  oc delete project --selector=xyz-logging
+  760  oc delete project xyz-logging
+  761  oc delete project xyz-logging
+  762  oc new-project xyz-logging
+  763  oc status
+  764  oc status
+  765  oc new-app --docker-image=docker.io/wkulhanek/logtofile:latest
+  766  clear
+  767  oc get projects
+  768  mkdir green-blue
+  769  cd green-blue/
+  770  ls
+  771  oc new-project -h
+  772  oc new-project ---description="Diverting traffic between two different applications" --display-name="greenblue"
+  773  oc new-project --display-name="greenblue" --description="Diverting traffic between two different applications"
+  774  oc get projects
+  775  oc new-project --display-name="greenblue" --description="Diverting traffic between two different applications"
+  776  oc new-project A/Btesting --display-name="greenblue" --description="Diverting traffic between two different applications"
+  777  oc new-project ABApplication --display-name="greenblue" --description="Diverting traffic between two different applications"
+  778  oc new-project blue-green-application --display-name="greenblue" --description="Diverting traffic between two different applications"
+  779  oc status
+  780  oc new-app
+  781  oc new-app -h
+  782  oc new-app --labels="blue" --name="blue"  https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  783  oc new-app --name="blue" --labels="blue"  https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  784  oc new-app --name="blue" --labels="blue"  php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  785  oc new-app --name="blue" --labels=name="blue"  https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+  786  oc get all
+  787  oc get all | echo
+  788  oc get all >resource_before.txt
+  789  oc expose svc blue
+  790  oc get all
+  791  oc get all >resource_after_expose.txt
+  792  oc get route -o json
+  793  oc get route -o json >route_blue.json
+  794  oc get svc blue
+  795  oc get svc blue --name=applicationbluegreen
+  796  oc expose svc blue --name=greenblueapp
+  797  nano route_blue.json
+  798  rm route_blue.json
+  799  ls
+  800  oc get route -o json >route_blue.json
+  801  oc new-app --name='green' --labels=name=green php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cities
+  802  oc patch route/bluegreen -p '{"spec":{"to":{"name":"green"}}}'
+  803  oc get routes
+  804  oc get routes
+  805  oc get all
+  806  clear
+  807  oc set env dc/blue SELECTOR=pets
+  808  oc set route-backends bluegreen green=100 blue=0
+  809  oc set route-backends bluegreenapplication green=100 blue=0
+  810  oc get  routes
+  811  oc set route-backends bluegreenapp green=100 blue=0
+  812  oc set route-backends greenblueapp green=100 blue=0
+  813  oc set probe dc/green --readiness --get-url=http://:8080/item.php --initial-delay-seconds=2
+  814  oc set probe dc/blue --readiness --get-url=http://:8080/item.php --initial-delay-seconds=2
+  815  oc set probe dc/green --liveness --get-url=http://:8080/item.php --initial-delay-seconds=2
+  816  oc set probe dc/blue --liveness --get-url=http://:8080/item.php --initial-delay-seconds=2nano
+  817  nano temp.txt
+  818  cleare
+  819  clear
+  820  oc get routes
+  821  nano temp.txt
+  822  cat temp.txt readiness_liveness.sh
+  823  cat temp.txt>readiness_liveness.sh
+  824  clea
+  825  clear
+  826  cat readiness_liveness.sh
+  827  bash readiness_liveness.sh
+  828  oc get deploymentconfig  green
+  829  oc describe dc green
+  830  git init
+  831  ls
+  832  pwd
+  833  rm temp.txt
+  834  ls
+  835  cat resource_after_expose.txt
+  836  clear
+  837  History
+  838  hsitory
+  839  history
+  840  history -h
+  841  history 1067
+  842  history -h
+  843  history 1068-1120
+  844  fc -l 1068 1120
+  845  fc -l 1068 1120 >cat commands
+  846  ls
+  847  fc -l 1068 1120 >commands
+  848  rm cat
+  849  nano commands
+  850  ls
+  851  cat commands
+  852  clear
+  853  git add .
+  854  oc login -u user8 https://master.d5c1.openshift.opentlc.com
+  855  clear
+  856  ls
+  857  oc get projects
+  858  clear
+  859  oc project xyz-nexus
+  860  oc project xyz-nexus1
+  861  oc login -u user8 https://master.4df4.openshift.opentlc.com
+  862  clear
+  863  oc new=project aks-jenkins
+  864  oc new-project aks-jenkins
+  865  oc new-app sonatype/nexus3:latest
+  866  oc expose svc nexus3
+  867  oc rollout pause dc nexus3
+  868  oc get all
+  869  oc get all
+  870  oc patch dc nexus3 --patch='{ "spec": { "strategy": { "type": "Recreate" }}}'
+  871  oc set resources dc nexus3 --limits=memory=2Gi,cpu=2 --requests=memory=1Gi,cpu=500m
+  872  echo "apiVersion: v1
+  873  kind: PersistentVolumeClaim
+  874  metadata:
+  875    name: nexus-pvc
+  876  spec:
+  877    accessModes:
+  878    - ReadWriteOnce
+  879    resources:
+  880      requests:
+  881        storage: 4Gi" | oc create -f -
+  882  oc set volume dc/nexus3 --add --overwrite --name=nexus3-volume-1 --mount-path=/nexus-data/ --type persistentVolumeClaim --claim-name=nexus-pvc
+  883  oc set probe dc/nexus3 --liveness --failure-threshold 3 --initial-delay-seconds 60 -- echo ok
+  884  oc get route
+  885  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081/
+  886  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8080/
+  887  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081/
+  888  ov get all
+  889  oc get all
+  890  oc get all
+  891  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  892  oc set  dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  893  oc set probe dc --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  894  oc set probe dc nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  895  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  896  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  897  oc project jenkins-persistent
+  898  oc project "shared jenkins"
+  899  oc project shared jenkins
+  900  oc xyz-jenkins1
+  901  oc  projectxyz-jenkins1
+  902  oc  project xyz-jenkins1
+  903  oc get all
+  904  clear
+  905  oc get all
+  906  oc get projects
+  907  oc project aks-jenkins
+  908  clear
+  909  oc get all
+  910  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http:// nexus3-aks-jenkins.apps.4df4.openshift.opentlc.com:8081
+  911  oc get all
+  912  clear
+  913  oc rollout resume dc nexus3
+  914  curl -o setup_nexus3.sh -s https://raw.githubusercontent.com/redhat-gpte-devopsautomation/ocp_advanced_development_resources/master/nexus/setup_nexus3.sh
+  915  chmod +x setup_nexus3.sh
+  916  ./setup_nexus3.sh admin admin123 http://$(oc get route nexus3 --template='{{ .spec.host }}')
+  917  rm setup_nexus3.sh
+  918  oc expose dc nexus3 --port=5000 --name=nexus-registry
+  919  oc create route edge nexus-registry --service=nexus-registry --port=5000
+  920  oc get routes -n xyz-nexus
+  921  oc get routes -n xyz-nexus1
+  922  oc annotate route nexus3 console.alpha.openshift.io/overview-app-route=true
+  923  oc annotate route nexus-registry console.alpha.openshift.io/overview-app-route=false
+  924  oc new-project xyz-sonarqube --display-name "Shared Sonarqube"
+  925  oc new-project xyz-sonarqube1 --display-name "Shared Sonarqube"
+  926  oc new-app --template=postgresql-persistent --param POSTGRESQL_USER=sonar --param POSTGRESQL_PASSWORD=sonar --param POSTGRESQL_DATABASE=sonar --param VOLUME_CAPACITY=4Gi --labels=app=sonarqube_db
+  927  oc new-app --docker-image=wkulhanek/sonarqube:6.7.5 --env=SONARQUBE_JDBC_USERNAME=sonar --env=SONARQUBE_JDBC_PASSWORD=sonar --env=SONARQUBE_JDBC_URL=jdbc:postgresql://postgresql/sonar --labels=app=sonarqube
+  928  oc rollout pause dc sonarqube
+  929  oc expose service sonarqube
+  930  echo "apiVersion: v1
+  931  kind: PersistentVolumeClaim
+  932  metadata:
+  933    name: sonarqube-pvc
+  934  spec:
+  935    accessModes:
+  936    - ReadWriteOnce
+  937    resources:
+  938      requests:
+  939        storage: 4Gi" | oc create -f -
+  940  oc set volume dc/sonarqube --add --overwrite --name=sonarqube-volume-1 --mount-path=/opt/sonarqube/data/ --type persistentVolumeClaim --claim-name=sonarqube-pvc
+  941  oc set resources dc/sonarqube --limits=memory=3Gi,cpu=2 --requests=memory=2Gi,cpu=1
+  942  oc patch dc sonarqube --patch='{ "spec": { "strategy": { "type": "Recreate" }}}'
+  943  oc set probe dc/sonarqube --liveness --failure-threshold 3 --initial-delay-seconds 40 -- echo ok
+  944  oc set all
+  945  oc get all
+  946  oc set probe dc/sonarqube --readiness --failure-threshold 3 --initial-delay-seconds 20 --get-url=http:// sonarqube-xyz-sonarqube1.apps.4df4.openshift.opentlc.com:9000/about
+  947  clear
+  948  oc rollout resume dc sonarqube
+  949  oc new-project xyz-gogs --display-name "Shared Gogs"
+  950  oc new-project xyz-gogs1 --display-name "Shared Gogs"
+  951  oc new-app postgresql-persistent --param POSTGRESQL_DATABASE=gogs --param POSTGRESQL_USER=gogs --param POSTGRESQL_PASSWORD=gogs --param VOLUME_CAPACITY=4Gi -lapp=postgresql_gogs
+  952  oc new-app wkulhanek/gogs:11.34 -lapp=gogs
+  953  echo "apiVersion: v1
+  954  kind: PersistentVolumeClaim
+  955  metadata:
+  956    name: gogs-data
+  957  spec:
+  958    accessModes:
+  959    - ReadWriteOnce
+  960    resources:
+  961      requests:
+  962        storage: 4Gi" | oc create -f -
+  963  oc set volume dc/gogs --add --overwrite --name=gogs-volume-1 --mount-path=/data/ --type persistentVolumeClaim --claim-name=gogs-data
+  964  oc expose svc gogs
+  965  oc get route gogs
+  966  oc new-project xyz-builds
+  967  oc new-project a
+  968  clear
+  969  history
+  970  history |login
+  971  history | grep login
+  972  oc login -u user8 https://master.4df4.openshift.opentlc.com
+  973  oc new-project akshay-builds
+  974  cd $HOME
+  975  git clone https://github.com/redhat-gpte-devopsautomation/openshift-tasks.git
+  976  cd $HOME/openshift-tasks
+  977  oc new-project xyz-gogs --display-name "Shared Gogs"
+  978  oc new-project xyz-gogs1 --display-name "Shared Gogs"
+  979  oc new-project ask-gogs --display-name "Shared Gogs"
+  980  oc new-app postgresql-persistent --param POSTGRESQL_DATABASE=gogs --param POSTGRESQL_USER=gogs --param POSTGRESQL_PASSWORD=gogs --param VOLUME_CAPACITY=4Gi -lapp=postgresql_gogs
+  981  oc new-app wkulhanek/gogs:11.34 -lapp=gogs
+  982  echo "apiVersion: v1
+  983  kind: PersistentVolumeClaim
+  984  metadata:
+  985    name: gogs-data
+  986  spec:
+  987    accessModes:
+  988    - ReadWriteOnce
+  989    resources:
+  990      requests:
+  991        storage: 4Gi" | oc create -f -
+  992  oc set volume dc/gogs --add --overwrite --name=gogs-volume-1 --mount-path=/data/ --type persistentVolumeClaim --claim-name=gogs-data
+  993  oc expose svc gogs
+  994  oc get route gogs
+  995  oc exec $(oc get pod | grep "^gogs" | awk '{print $1}') -- cat /opt/gogs/custom/conf/app.ini >$HOME/app.ini
+  996  clear
+  997  history | grep ssh
+  998  history | greplogin
+  999  clear
+ 1000  history | grep login
+ 1001   oc login -u user8 https://master.4df4.openshift.opentlc.com
+ 1002  oc get all
+ 1003  oc new-project side-delete
+ 1004  oc new-app --docker-image=docker.io/wkulhanek/logtofile:latest
+ 1005  oc get all
+ 1006  oc rsh logtofile logtofile-1-deploy
+ 1007  oc rsh  logtofile-1-deploy
+ 1008  oc get all
+ 1009  oc rsh logtofile logtofile-1-fzw86
+ 1010  oc rsh  logtofile-1-fzw86
+ 1011  oc logs logtofile-1-fzw86
+ 1012  clear
+ 1013  tail -n
+ 1014  tail 1
+ 1015  tail -1 /tmp/sample.txt
+ 1016  nano /tmp/sample.txt
+ 1017  tail -1 /tmp/sample.txt
+ 1018  tail 1 /tmp/sample.txt
+ 1019  tail -2 /tmp/sample.txt
+ 1020  tail -n+1
+ 1021  tail -n+1 /tmp/sample.txt
+ 1022  tail -n+1 /tmp/sample.txt
+ 1023  clear
+ 1024  oc edit dc logtofile -o json
+ 1025  oc get dc logtofile -o json
+ 1026  oc get all
+ 1027  oc logs -f logtofile-2-r2gsl
+ 1028  oc logs -f --container=logging-sidecar logtofile-2-r2gsl
+ 1029  oc get volumes
+ 1030  oc get volume
+ 1031  oc volume
+ 1032  oc volumes -h
+ 1033  oc volumes -h --show-all
+ 1034  oc volumes -h --show-all=true
+ 1035  oc volumes -o json
+ 1036  oc get
+ 1037  oc sc
+ 1038  oc get sc
+ 1039  oc status
+ 1040  oc get rc -o yaml
+ 1041  oc get all
+ 1042  oc get rc logtofile-2 -o yaml
+ 1043  oc get all
+ 1044  oc describe pod
+ 1045  oc get pods -o yaml
+ 1046  clear
+ 1047  oc projects
+ 1048  oc project blue-green-application - greenblue
+ 1049  oc project blue-green-application-greenblue
+ 1050  oc project blue-green-application
+ 1051  oc get all
+ 1052  oc new-project bluegreen
+ 1053  clear
+ 1054  oc status
+ 1055  oc new-app --name='blue' --labels=name="blue" php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cats
+ 1056  oc expose svc/blue --name=bluegreen
+ 1057  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1058  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1059  oc new-app --name='green' --labels=name=green php~https://github.com/redhat-gpte-devopsautomation/cotd.git --env=SELECTOR=cities
+ 1060  oc patch route/bluegreen -p '{"spec":{"to":{"name":"green"}}}'
+ 1061  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1062  oc set env dc/blue SELECTOR=pets
+ 1063  oc get all
+ 1064  oc get all
+ 1065  oc set route-backends bluegreen green=10 blue=20
+ 1066  while true; do curl -s $(oc get route bluegreen --template='{{ .spec.host }}')/item.php | grep "data/images" | awk '{print $5}'; sleep 1; done
+ 1067  oc set probe dc/green --readiness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1068  oc set probe dc/blue --readiness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1069  oc set probe dc/green --liveness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1070  oc set probe dc/blue --liveness --get-url=http://$(oc get route bluegreen --template='{{ .spec.host }}'):8080/item.php --initial-delay-seconds=2
+ 1071  history | cut -c 8-
+ 1072  history | grep -A 135 -w 321
+ 1073  history
+ 1074  history | grep -A 1052 -w 1070 | cut -c 8-
+ 1075  history | grep -A 1052 -w 1070
+ 1076  history | grep -A 1052 -w 1070
+ 1077  history | grep -A 1051 -w 1070
+ 1078  history
+ 1079  clear
+ 1080  oc get all
+ 1081  oc svc blue
+ 1082   oc  get svc blue
+ 1083  oc get route
+ 1084  clear
+ 1085  oc status
+ 1086  clear
+ 1087  oc new-project akshay-nexus --display-name "Shared Nexus"
+ 1088  oc get all
+ 1089  oc new-app sonatype/nexus3:latest
+ 1090  oc get all
+ 1091  oc get is -o json
+ 1092  oc expose svc nexus3
+ 1093  oc rollout pause dc nexus3
+ 1094  oc get all
+ 1095  oc patch dc nexus3 --patch='{ "spec": { "strategy": { "type": "Recreate" }}}'
+ 1096  oc set resources dc nexus3 --limits=memory=2Gi,cpu=2 --requests=memory=1Gi,cpu=500m
+ 1097  echo "apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nexus-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi" | oc create -f -
+ 1098  oc set volume dc/nexus3 --add --overwrite --name=nexus3-volume-1 --mount-path=/nexus-data/ --type persistentVolumeClaim --claim-name=nexus-pvc
+ 1099  oc set probe dc/nexus3 --liveness --failure-threshold 3 --initial-delay-seconds 60 -- echo ok
+ 1100  oc get all
+ 1101  oc get dc nexus3
+ 1102  oc get dc nexus3 -o json
+ 1103  oc get dc nexus3 -o json | grep trigger
+ 1104  oc get dc nexus3 -o json | grep liveness
+ 1105  clear
+ 1106  history
+ 1107  oc get routes
+ 1108  oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://nexus3-akshay-nexus.apps.4df4.openshift.opentlc.com:8081/
+ 1109  oc get all
+ 1110  oc rollout resume dc nexus3;oc get all
+ 1111  oc rollout resume dc nexus3;oc get all
+ 1112  oc rollout resume dc nexus3;oc get all
+ 1113  oc get all
+ 1114  clear
+ 1115  oc expose svc
+ 1116  oc expose svc nexus3
+ 1117  oc get routes
+ 1118  curl -o setup_nexus3.sh -s https://raw.githubusercontent.com/redhat-gpte-devopsautomation/ocp_advanced_development_resources/master/nexus/setup_nexus3.sh
+ 1119  chmod +x setup_nexus3.sh
+ 1120  ./setup_nexus3.sh admin admin123 http://$(oc get route nexus3 --template='{{ .spec.host }}')
+ 1121  rm setup_nexus3.sh
+ 1122  cat setup_nexus3.sh
+ 1123  rm setup_nexus3.sh
+ 1124  clear
+ 1125  oc status
+ 1126  oc expose dc nexus3 --port=5000 --name=nexus-registry
+ 1127  oc get dc nexus3 -o json
+ 1128  oc get all
+ 1129  oc status
+ 1130  oc create route edge nexus-registry --service=nexus-registry --port=5000
+ 1131  oc get routes
+ 1132  oc get routes
+ 1133  oc get routes
+ 1134  oc get dc nexus3
+ 1135  oc get dc nexus3 -o json
+ 1136  clear
+ 1137  oc annotate route nexus3 console.alpha.openshift.io/overview-app-route=true
+ 1138  oc annotate route nexus-registry console.alpha.openshift.io/overview-app-route=false
+ 1139  oc new-project akshay-sonarqube --display-name "Shared Sonarqube"
+ 1140  oc new-app -h
+ 1141  oc new-app --template=postgresql-persistent --param POSTGRESQL_USER=sonar --param POSTGRESQL_PASSWORD=sonar --param POSTGRESQL_DATABASE=sonar --param VOLUME_CAPACITY=4Gi --labels=app=sonarqube_db
+ 1142  oc new-app --docker-image=wkulhanek/sonarqube:6.7.5 --env=SONARQUBE_JDBC_USERNAME=sonar --env=SONARQUBE_JDBC_PASSWORD=sonar --env=SONARQUBE_JDBC_URL=jdbc:postgresql://postgresql/sonar --labels=app=sonarqube
+ 1143  oc rollout pause dc sonarqube
+ 1144  oc expose service sonarqube
+ 1145  oc get all
+ 1146  oc get dc nexus3
+ 1147  oc get dc
+ 1148  oc project akshay-nexus
+ 1149  oc get all
+ 1150  oc get dc nexus3 -o json
+ 1151  oc project akshay-sonarqube
+ 1152  oc get all
+ 1153  echo "apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarqube-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi" | oc create -f -
+ 1154  oc set volume dc/sonarqube --add --overwrite --name=sonarqube-volume-1 --mount-path=/opt/sonarqube/data/ --type persistentVolumeClaim --claim-name=sonarqube-pvc
+ 1155  oc set resources dc/sonarqube --limits=memory=3Gi,cpu=2 --requests=memory=2Gi,cpu=1
+ 1156  oc patch dc sonarqube --patch='{ "spec": { "strategy": { "type": "Recreate" }}}'
+ 1157  oc get routes
+ 1158  oc set probe dc/sonarqube --liveness --failure-threshold 3 --initial-delay-seconds 40 -- echo ok
+ 1159  oc set probe dc/sonarqube --readiness --failure-threshold 3 --initial-delay-seconds 20 --get-url=http://sonarqube-akshay-sonarqube.apps.4df4.openshift.opentlc.com:9000/about
+ 1160  oc rollout resume dc sonarqube
+ 1161  oc new-project akshay-gogs --display-name "Shared Gogs"
+ 1162  oc new-app postgresql-persistent --param POSTGRESQL_DATABASE=gogs --param POSTGRESQL_USER=gogs --param POSTGRESQL_PASSWORD=gogs --param VOLUME_CAPACITY=4Gi -lapp=postgresql_gogs
+ 1163  oc new-app wkulhanek/gogs:11.34 -lapp=gogs
+ 1164  echo "apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gogs-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi" | oc create -f -
+ 1165  oc set volume dc/gogs --add --overwrite --name=gogs-volume-1 --mount-path=/data/ --type persistentVolumeClaim --claim-name=gogs-data
+ 1166  oc get dc gogs -o json
+ 1167  oc expose svc gogs
+ 1168  oc get route gogs
+ 1169  oc get all
+ 1170  oc get pods
+ 1171  oc get po gogs-2-ft9hp -o json
+ 1172  oc exec $(oc get pod | grep "^gogs" | awk '{print $1}') -- cat /opt/gogs/custom/conf/app.ini >$HOME/app.ini
+ 1173  pwd
+ 1174  cd $HOME
+ 1175  ls
+ 1176  cat app.ini
+ 1177  $(oc get pod | grep "^gogs" | awk '{print $1}')
+ 1178  echo $(oc get pod | grep "^gogs" | awk '{print $1}')
+ 1179  echo oc get pod | grep "^gogs"
+ 1180  oc get pod | grep "^gogs"
+ 1181  oc get pod | grep "^gogs" | awk
+ 1182  oc get pod | grep "^gogs" | awk { print $2}
+ 1183  oc get pod | grep "^gogs" | awk { print $2 }
+ 1184  oc get pod | grep "^gogs" | awk { print $1 }
+ 1185  oc get pod | grep "^gogs" | awk '{ print $2 }'
+ 1186  clear
+ 1187  oc create configmap gogs --from-file=$HOME/app.ini
+ 1188  oc get all
+ 1189  oc configmap
+ 1190  oc get
+ 1191  oc get configmaps
+ 1192  oc get configmaps -o json
+ 1193  cat app.ini
+ 1194  oc get dc gogs -o json
+ 1195  oc set volume dc/gogs --add --overwrite --name=config-volume -m /opt/gogs/custom/conf/ -t configmap --configmap-name=gogs
+ 1196  oc get dc gogs -o json
+ 1197  clear
+ 1198  oc export all -o yaml > project.yaml
+ 1199  cat project.yaml
+ 1200  clear
+ 1201  oc get routes
+ 1202  cd $HOME
+ 1203  git clone https://github.com/redhat-gpte-devopsautomation/openshift-tasks.git
+ 1204  ls
+ 1205  rm openshift-tasks/
+ 1206  rm -R openshift-tasks/
+ 1207  ls
+ 1208  rm -h
+ 1209  rm --help
+ 1210  rm -fR openshift-tasks/
+ 1211  ls
+ 1212  cd $HOME
+ 1213  git clone https://github.com/redhat-gpte-devopsautomation/openshift-tasks.git
+ 1214  ls
+ 1215  cd openshift-tasks/
+ 1216  ls
+ 1217  oc status
+ 1218  git remote add gogs http://root:root@$(oc get route gogs -n akshay-gogs --template='{{ .spec.host }}')/CICDLabs/openshift-tasks.git
+ 1219  git push -u gogs master
+ 1220  git remote add gogs http://root:root@$(oc get route gogs -n akshay-gogs --template='{{ .spec.host }}')/CICDLabs/openshift-tasks.git
+ 1221  git push -u gogs master
+ 1222  oc project akshay-nexus
+ 1223  oc get all
+ 1224  ls
+ 1225  nano nexus_openshift_settings.xml
+ 1226  git commit -m "Updated Settings" nexus_settings.xml nexus_openshift_settings.xml
+ 1227  git push gogs master
+ 1228  history > allcommands
